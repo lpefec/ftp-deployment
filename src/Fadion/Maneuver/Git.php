@@ -273,10 +273,14 @@ class Git {
             new \RecursiveDirectoryIterator(base_path()."/vendor"),
             \RecursiveIteratorIterator::SELF_FIRST);
 
+        $composerLastUpdate = strtotime(date ("d-m-Y", filemtime(base_path()."/composer.lock")));
+        sd($composerLastUpdate);
         foreach($objects as $file => $object){
             if($object->isFile()){
-                $files[]=str_replace(base_path()."/",'',$file);
-
+                $fileDate = strtotime(date ("d-m-Y", filemtime($file)));
+                if($fileDate>=$composerLastUpdate){
+                    $files[]=str_replace(base_path()."/",'',$file);
+                }
             }
         }
         return $files;
