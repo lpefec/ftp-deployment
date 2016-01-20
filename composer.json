@@ -1,6 +1,6 @@
 {
     "name": "fadion/maneuver",
-    "description": "Easily deploy Laravel projects via FTP or SFTP, using Git for versioning.",
+    "description": "Fork of fadion/maneuver.",
     "license": "MIT",
     "keywords": ["laravel", "deployment", "git", "ftp", "ssh"],
     "authors": [
