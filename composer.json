@@ -1,0 +1,32 @@
+{
+    "name": "fadion/maneuver",
+    "description": "Easily deploy Laravel projects via FTP or SFTP, using Git for versioning.",
+    "license": "MIT",
+    "keywords": ["laravel", "deployment", "git", "ftp", "ssh"],
+    "authors": [
+        {
+            "name": "Fadion Dashi",
+            "email": "jonidashi@gmail.com",
+            "homepage": "http://www.streha.al"
+        },
+        {
+            "name": "Baki Goxhaj",
+            "email": "banago@gmail.com",
+            "homepage": "http://www.wplancer.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.2.*",
+        "illuminate/console": "5.2.*",
+        "illuminate/config": "5.2.*",
+        "banago/bridge": "~1.0.6",
+        "jakeasmith/http_build_url": "~0.1.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Fadion\\Maneuver": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
