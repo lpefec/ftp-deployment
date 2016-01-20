@@ -121,6 +121,10 @@ class Deploy {
             $filesToUpload = $this->git->files();
         }
 
+        if(config('maneuver.include_vendor')){
+            $filesToUpload[] = $this->git->vendor();
+        }
+
         // Remove ignored files from the list of uploads.
         $filesToUpload = array_diff($filesToUpload, $this->ignoredFiles);
 
