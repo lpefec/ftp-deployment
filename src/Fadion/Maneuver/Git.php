@@ -82,7 +82,6 @@ class Git {
         }
 
         $command = 'git --git-dir="'.$repoPath.'/.git" --work-tree="'.$repoPath.'" '.$command;
-
         exec(escapeshellcmd($command), $output, $returnStatus);
 
         if ($returnStatus != 0) {
@@ -261,4 +260,26 @@ class Git {
         return $this->submodules;
     }
 
+    /**
+     * Gets files from vendor
+     *
+     * @return mixed
+     */
+    public function vendor()
+    {
+        $files = [];
+
+        $objects = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator(base_path()."/vendor"),
+            \RecursiveIteratorIterator::SELF_FIRST);
+
+        foreach($objects as $file => $object){
+            if($object->isFile()){
+                $files[]=str_replace(base_path()."/",'',$file);
+
+            }
+        }
+        return $files;
+
+    }
 }
