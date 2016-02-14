@@ -58,7 +58,7 @@ class Git {
         $this->subModules();
 
         // Load the ignored files array from config.
-        $ignored = config('maneuver.ignored');
+        $ignored = app()->config['maneuver::config.ignored'];
 
         if ($ignored) {
             foreach ($ignored as $file) {
@@ -82,6 +82,7 @@ class Git {
         }
 
         $command = 'git --git-dir="'.$repoPath.'/.git" --work-tree="'.$repoPath.'" '.$command;
+
         exec(escapeshellcmd($command), $output, $returnStatus);
 
         if ($returnStatus != 0) {
@@ -260,30 +261,4 @@ class Git {
         return $this->submodules;
     }
 
-    /**
-     * Gets files from vendor
-     *
-     * @return mixed
-     */
-    public function vendor()
-    {
-        $files = [];
-
-        $objects = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(base_path()."/vendor"),
-            \RecursiveIteratorIterator::SELF_FIRST);
-
-        $composerLastUpdate = strtotime(date ("d-m-Y", filemtime(base_path()."/composer.lock")));
-        sd($composerLastUpdate);
-        foreach($objects as $file => $object){
-            if($object->isFile()){
-                $fileDate = strtotime(date ("d-m-Y", filemtime($file)));
-                if($fileDate>=$composerLastUpdate){
-                    $files[]=str_replace(base_path()."/",'',$file);
-                }
-            }
-        }
-        return $files;
-
-    }
 }

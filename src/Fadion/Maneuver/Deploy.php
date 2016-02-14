@@ -121,13 +121,6 @@ class Deploy {
             $filesToUpload = $this->git->files();
         }
 
-        if(config('maneuver.include_vendor')){
-            foreach($this->git->vendor() as $vendor){
-                $filesToUpload[] = $vendor;
-
-            }
-        }
-
         // Remove ignored files from the list of uploads.
         $filesToUpload = array_diff($filesToUpload, $this->ignoredFiles);
 
@@ -199,6 +192,7 @@ class Deploy {
         if ($this->isSubmodule) {
             $file = $this->isSubmodule.'/'.$file;
         }
+
         $dir = explode('/', dirname($file));
         $path = '';
         $pathThatExists = null;
